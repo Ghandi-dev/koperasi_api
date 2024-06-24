@@ -21,8 +21,8 @@ export const loginUser = async (req, res) => {
     }
 
     // Cari user berdasarkan id_karyawan
-    const user = await User.findOne({ where: { id_karyawan } });
-    const userData = await UserData.findOne({ where: { id_karyawan } });
+    const user = await User.findOne({ where: { id_karyawan: id_karyawan } });
+    const userData = await UserData.findOne({ where: { id_karyawan: id_karyawan } });
 
     // Validasi user dan password
     if (!user || !(await bcrypt.compare(password, user.password))) {
