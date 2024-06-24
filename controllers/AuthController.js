@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import UserData from "../models/UserData.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"; // Pastikan bcryptjs diimport
 
@@ -21,6 +22,7 @@ export const loginUser = async (req, res) => {
 
     // Cari user berdasarkan id_karyawan
     const user = await User.findOne({ where: { id_karyawan } });
+    const userData = await UserData.findOne({ where: { id_karyawan } });
 
     // Validasi user dan password
     if (!user || !(await bcrypt.compare(password, user.password))) {
@@ -35,6 +37,7 @@ export const loginUser = async (req, res) => {
     const token = signToken(user.id_karyawan);
 
     return res.status(200).json({
+      username: userData.id_karyawan,
       status: "Success",
       message: "Login successful",
       token,
