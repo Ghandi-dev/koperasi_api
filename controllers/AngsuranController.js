@@ -1,5 +1,4 @@
 import Angsuran from "../models/Angsuran.js";
-import Pinjaman from "../models/Pinjaman.js";
 import response from "../response.js";
 
 export const getAngsuran = async (req, res) => {
