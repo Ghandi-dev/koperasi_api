@@ -50,3 +50,37 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+export const registration = async (req, res) => {
+  const { id_karyawan, nama_lengkap, status, alamat, no_rek, password } = req.body;
+
+  try {
+    // Create user data
+    const resDataUser = await UserData.create({
+      id_karyawan,
+      nama_lengkap,
+      status,
+      alamat,
+      no_rek,
+    });
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create user
+    const resUser = await User.create({
+      id_karyawan,
+      password: hashedPassword,
+      level: 1,
+      aktif: 2,
+    });
+
+    // Respond with created user details
+    return res.status(200).json(resUser);
+  } catch (error) {
+    // Handle any errors
+    console.error("Error creating user:", error);
+    return res.status(500).json({
+      status: "Error",
+      message: "Internal server error",
+    });
+  }
+};
