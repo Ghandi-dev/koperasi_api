@@ -1,4 +1,5 @@
 import Angsuran from "../models/Angsuran.js";
+import Pinjaman from "../models/Pinjaman.js";
 import response from "../response.js";
 
 export const getAngsuran = async (req, res) => {
@@ -17,8 +18,29 @@ export const getAngsuran = async (req, res) => {
 
 export const getAngsuranByIdPinjaman = async (req, res) => {
   try {
-    console.log(req.query.no_pinjaman);
     const result = await Angsuran.findAll({ where: { no_pinjaman: req.query.no_pinjaman, status: 2 } });
+
+    if (!result) {
+      return res.status(404).json({
+        status: "Fail",
+        message: "Angsuran not found for this pinjaman",
+      });
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({
+      status: "Error",
+      message: "Server error",
+    });
+  }
+};
+
+export const getSisaAngsuran = async (req, res) => {
+  try {
+    const pinjamanTerakhir = await Pinjaman.findOne({ where: { id_karyawan: req.user.id_karyawan, status: 0 } });
+    console.log(pinjamanTerakhir);
+    const result = await Angsuran.findAll({ where: { no_pinjaman: pinjamanTerakhir.no_pinjaman, status: 0 } });
 
     if (!result) {
       return res.status(404).json({
