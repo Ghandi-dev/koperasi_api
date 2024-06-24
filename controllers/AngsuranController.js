@@ -40,7 +40,7 @@ export const getSisaAngsuran = async (req, res) => {
   try {
     const pinjamanTerakhir = await Pinjaman.findOne({ where: { id_karyawan: req.user.id_karyawan, status: 0 } });
     console.log(pinjamanTerakhir);
-    const result = await Angsuran.findAll({ where: { no_pinjaman: pinjamanTerakhir.no_pinjaman, status: 0 } });
+    const result = await Angsuran.findOne({ where: { no_pinjaman: pinjamanTerakhir.no_pinjaman, status: 2 },order: [["id", "DESC"]] });
 
     if (!result) {
       return res.status(404).json({
