@@ -15,11 +15,11 @@ export const getSimpanan = async (req, res) => {
   }
 };
 
-export const getSimpananByUserId = async (req, res) =>{
+export const getSimpananByUserId = async (req, res) => {
   try {
-    const result = await Simpanan.findAll({ where: { id_karyawan: req.user.id_karyawan } });
+    const result = await Simpanan.findAll({ where: { id_karyawan: req.user.id_karyawan }, order: [["no_simpanan", "DESC"]] });
     res.status(200).json(result);
   } catch (error) {
     console.log(error.message);
   }
-}
+};

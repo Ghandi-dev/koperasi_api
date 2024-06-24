@@ -18,7 +18,7 @@ export const getAngsuran = async (req, res) => {
 export const getAngsuranByIdPinjaman = async (req, res) => {
   try {
     console.log(req.query.no_pinjaman);
-    const result = await Angsuran.findAll({ where: { no_pinjaman: req.query.no_pinjaman, status: 2 }, order: [["no_simpanan", "DESC"]] });
+    const result = await Angsuran.findAll({ where: { no_pinjaman: req.query.no_pinjaman, status: 2 } });
 
     if (!result) {
       return res.status(404).json({
