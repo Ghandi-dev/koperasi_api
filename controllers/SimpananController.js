@@ -14,3 +14,12 @@ export const getSimpanan = async (req, res) => {
     console.log(error.message);
   }
 };
+
+export const getSimpananByUserId = async (req, res) =>{
+  try {
+    const result = await Simpanan.findAll({ where: { id_karyawan: req.user.id_karyawan } });
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
