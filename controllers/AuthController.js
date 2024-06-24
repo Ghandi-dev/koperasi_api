@@ -37,7 +37,7 @@ export const loginUser = async (req, res) => {
     const token = signToken(user.id_karyawan);
 
     return res.status(200).json({
-      username: userData.id_karyawan,
+      username: userData.nama_karyawan,
       status: "Success",
       message: "Login successful",
       token,
