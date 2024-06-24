@@ -6,7 +6,7 @@ export const getAngsuran = async (req, res) => {
     const user = req.user;
     if (user.level == 2) {
       const result = await Angsuran.findAll();
-      response(200, result, "get all Angsuran", res);
+      res.status(200).json(result);
     } else {
       res.status(403).json({ message: "porbidden" });
     }
@@ -26,12 +26,7 @@ export const getAngsuranByIdPinjaman = async (req, res) => {
         message: "Angsuran not found for this pinjaman",
       });
     }
-
-    res.status(200).json({
-      status: "Success",
-      message: "Get Angsuran By id",
-      data: result,
-    });
+    res.status(200).json(result);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({

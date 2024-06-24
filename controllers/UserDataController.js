@@ -4,7 +4,7 @@ import response from "../response.js";
 export const getUserData = async (req, res) => {
   try {
     const result = await UserData.findAll();
-    response(200, result, "get all User Data", res);
+    res.status(200).json(result);
   } catch (error) {
     console.log(error.message);
   }

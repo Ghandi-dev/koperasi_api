@@ -6,7 +6,7 @@ export const getSimpanan = async (req, res) => {
     const user = req.user;
     if (user.level == 2) {
       const result = await Simpanan.findAll();
-      response(200, result, "get all Simpanan", res);
+      res.status(200).json(result);
     } else {
       res.status(403).json({ message: "porbidden" });
     }

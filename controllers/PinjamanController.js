@@ -6,7 +6,7 @@ export const getPinjaman = async (req, res) => {
     const user = req.user;
     if (user.level == 2) {
       const result = await Pinjaman.findAll();
-      response(200, result, "get all Pinjaman", res);
+      res.status(200).json(result)
     } else {
       res.status(403).json({ message: "porbidden" });
     }
@@ -18,7 +18,7 @@ export const getPinjaman = async (req, res) => {
 export const getPinjamanByUserId = async (req, res) => {
   try {
     const result = await Pinjaman.findAll({ where: { id_karyawan: req.user.id_karyawan } });
-    response(200, result, "get all Pinjaman By User Id", res);
+    res.status(200).json(result)
   } catch (error) {
     console.log(error.message);
   }
