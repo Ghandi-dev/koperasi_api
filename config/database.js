@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import mysql2 from 'mysql2';
+import { Sequelize } from "sequelize";
+import mysql2 from "mysql2";
 
 const db = new Sequelize("sql_koperasi", "sql_koperasi", "ydaswpPyMaBKf84e", {
   host: "localhost",
@@ -8,10 +8,6 @@ const db = new Sequelize("sql_koperasi", "sql_koperasi", "ydaswpPyMaBKf84e", {
   benchmark: true,
 });
 
-export default db;
-// import { Sequelize } from "sequelize";
-// import mysql2 from "mysql2";
-
 // const db = new Sequelize("db_koperasi2", "root", "", {
 //   host: "localhost",
 //   dialect: "mysql",
@@ -19,4 +15,4 @@ export default db;
 //   benchmark: true,
 // });
 
-// export default db;
+export default db;
